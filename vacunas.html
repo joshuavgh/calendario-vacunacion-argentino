@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Vacunación Argentino</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #0077b6;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .vacuna {
+            padding: 10px;
+            margin: 10px 0;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .vacuna h3 {
+            color: #0077b6;
+        }
+        .info {
+            display: none;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 5px;
+        }
+        .footer-image {
+            width: 80%; /* Ajusta el tamaño en relación a la pantalla */
+            max-width: 600px; /* Evita que se agrande demasiado */
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .footer-image:hover {
+            transform: scale(1.1); /* Hace zoom al pasar el mouse */
+        }
+
+        /* Modal para la imagen en pantalla completa */
+        #modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        #modal span {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Calendario de Vacunación Argentino</h1>
+    </header>
+    <div class="container">
+        <h2>Vacunas y su Información</h2>
+            <div class="vacuna" onclick="toggleInfo('bcg')">
+                <h3>BCG</h3>
+                <div class="info" id="bcg">
+                    <p><strong>Edad de aplicación:</strong> Recién nacidos y edad max. hasta los 6 años, 11 meses y 29 días.</p>
+                    <p><strong>Previene:</strong> Tuberculosis (formas graves como meningitis tuberculosa y tuberculosis miliar).</p>
+                    <p><strong>Vía de administración:</strong> Intradérmica, en la región del deltoides del brazo derecho.</p>
+                    <p><strong>Composición:</strong> bacterias vivas atenuadas (cepa Bacillus Calmette-Guérin).</p>
+                    <p><strong>Compatibilidad con otras vacunas:</strong> Puede administrarse simultáneamente con Hepatitis B, pero en sitios anatómicos diferentes.</p>
+                    <p><strong>Indicaciones:</strong> Todos los recién nacidos, en aquellos que no tengan ni la cicatriz ni el carnet de vacunas completo con la misma.</p>
+                    <p><strong>Contraindicaciones:</strong> Inmunodeficiencias congénitas o adquiridas (HIV), bebés con bajo peso (<2000g), fiebre alta o enfermedades graves en curso.</p>
+                    <p><strong>Recomendaciones ante esquema atrasado:</strong> Si no se aplicó al nacer, puede administrarse hasta antes de los 7 años.</p>
+                    <p><strong>Complicaciones:</strong> Reacción local con úlcera en el sitio de aplicación (cicatrización normal), adenitis regional supurativa en casos raros.</p>
+                </div>
+        </div>
+        <div class="vacuna" onclick="toggleInfo('hepatitisB')">
+            <h3>Hepatitis B</h3>
+            <div class="info" id="hepatitisB">
+                <p><strong>Edad de aplicación:</strong> Recién nacidos (primera dosis), luego a los 2, 4 y 6 meses.</p>
+                <p><strong>Previene:</strong> Hepatitis B y sus complicaciones crónicas como cirrosis y cáncer de hígado.</p>
+                <p><strong>Vía de administración:</strong> Intramuscular.</p>
+                <p><strong>Composición:</strong> Antígeno de superficie del virus de la hepatitis B (HBsAg).</p>
+                <p><strong>Compatibilidad con otras vacunas:</strong> Puede administrarse con otras vacunas del calendario.</p>
+                <p><strong>Indicaciones:</strong> Todos los recién nacidos y niños en esquema primario.</p>
+                <p><strong>Contraindicaciones:</strong> Reacción alérgica grave a dosis previas o componentes de la vacuna.</p>
+                <p><strong>Recomendaciones ante esquema atrasado:</strong> Completar las dosis pendientes según la edad.</p>
+                <p><strong>Complicaciones:</strong> Dolor local, fiebre baja, reacciones alérgicas muy raras.</p>
+            </div>
+        </div>
+        <div class="vacuna" onclick="toggleInfo('neumococo')">
+            <h3>Neumococo</h3>
+            <div class="info" id="neumococo">
+                <p><strong>Edad de aplicación:</strong> 2, 4 y 12 meses.</p>
+                <p><strong>Previene:</strong> Enfermedades invasivas por Streptococcus pneumoniae, como neumonía, meningitis y sepsis.</p>
+                <p><strong>Vía de administración:</strong> Intramuscular.</p>
+                <p><strong>Composición:</strong> Polisacáridos conjugados de Streptococcus pneumoniae.</p>
+                <p><strong>Compatibilidad con otras vacunas:</strong> Se puede administrar con otras vacunas del calendario en diferentes sitios anatómicos.</p>
+                <p><strong>Indicaciones:</strong> Todos los lactantes en esquema primario.</p>
+                <p><strong>Contraindicaciones:</strong> Alergia grave a componentes de la vacuna.</p>
+                <p><strong>Recomendaciones ante esquema atrasado:</strong> Aplicar la dosis pendiente según la edad y esquema alternativo.</p>
+                <p><strong>Complicaciones:</strong> Enrojecimiento y dolor local, fiebre leve, rara vez reacciones adversas graves.</p>
+            </div>
+        </div>
+        <div class="vacuna" onclick="toggleInfo('polio')">
+            <h3>Poliomielitis</h3>
+            <div class="info" id="polio">
+                <p><strong>Edad de aplicación:</strong> 2, 4, 6 meses y refuerzo a los 5 años.</p>
+                <p><strong>Previene:</strong> Poliomielitis causada por virus polio tipo 1, 2 y 3.</p>
+                <p><strong>Vía de administración:</strong> Intramuscular o vía oral (según dosis).</p>
+                <p><strong>Composición:</strong> Vacuna inactivada o atenuada según el tipo de aplicación.</p>
+                <p><strong>Compatibilidad con otras vacunas:</strong> Puede administrarse simultáneamente con otras vacunas del calendario.</p>
+                <p><strong>Indicaciones:</strong> Prevención de la poliomielitis en niños pequeños.</p>
+                <p><strong>Contraindicaciones:</strong> Alergia severa a componentes de la vacuna.</p>
+                <p><strong>Recomendaciones ante esquema atrasado:</strong> Aplicar la dosis pendiente según la edad del niño.</p>
+                <p><strong>Complicaciones:</strong> Fiebre leve, dolor local, rara vez reacciones adversas graves.</p>
+            </div>
+        </div>
+        <div class="vacuna" onclick="toggleInfo('quintuple')">
+            <h3>Quíntuple</h3>
+            <div class="info" id="quintuple">
+                <p><strong>Edad de aplicación:</strong> 2, 4, 6 y 18 meses.</p>
+                <p><strong>Previene:</strong> Difteria, tétanos, tos convulsa, Haemophilus influenzae tipo B y hepatitis B.</p>
+                <p><strong>Vía de administración:</strong> Intramuscular.</p>
+                <p><strong>Composición:</strong> Toxoides, fracciones proteicas y polisacáridos conjugados.</p>
+                <p><strong>Compatibilidad con otras vacunas:</strong> Puede aplicarse junto con otras vacunas en diferentes sitios anatómicos.</p>
+                <p><strong>Indicaciones:</strong> Protección combinada contra múltiples enfermedades en lactantes.</p>
+                <p><strong>Contraindicaciones:</strong> Reacción alérgica grave a una dosis previa o componente de la vacuna.</p>
+                <p><strong>Recomendaciones ante esquema atrasado:</strong> Completar el esquema según la edad con intervalos mínimos recomendados.</p>
+                <p><strong>Complicaciones:</strong> Fiebre, dolor local, irritabilidad, reacciones alérgicas raras.</p>
+            </div>
+        </div>
+        <div class="vacuna" onclick="toggleInfo('rotavirus')">
+            <h3>Rotavirus</h3>
+            <div class="info" id="rotavirus">
+                <p><strong>Edad de aplicación:</strong> 2 y 4 meses.</p>
+                <p><strong>Previene:</strong> Gastroenteritis severa por rotavirus.</p>
+                <p><strong>Vía de administración:</strong> Oral.</p>
+                <p><strong>Composición:</strong> Virus vivos atenuados.</p>
+                <p><strong>Compatibilidad con otras vacunas:</strong> Puede administrarse simultáneamente con otras vacunas del calendario.</p>
+                <p><strong>Indicaciones:</strong> Prevención de infecciones severas por rotavirus en lactantes.</p>
+                <p><strong>Contraindicaciones:</strong> Alergia a algún componente, historia de invaginación intestinal.</p>
+                <p><strong>Recomendaciones ante esquema atrasado:</strong> No iniciar ni completar después de los 8 meses de edad.</p>
+                <p><strong>Complicaciones:</strong> Irritabilidad, fiebre, vómitos leves.</p>
+            </div>
+        </div>
+        <div class="vacuna" onclick="toggleInfo('meningococo')">
+            <h3>Meningococo</h3>
+            <div class="info" id="meningococo">
+                <p><strong>Edad de aplicación:</strong> 3, 5 y 15 meses.</p>
+                <p><strong>Previene:</strong> Meningitis y sepsis por Neisseria meningitidis.</p>
+                <p><strong>Vía de administración:</strong> Intramuscular.</p>
+                <p><strong>Composición:</strong> Polisacáridos conjugados de Neisseria meningitidis.</p>
+                <p><strong>Compatibilidad con otras vacunas:</strong> Puede administrarse simultáneamente con otras vacunas en sitios anatómicos diferentes.</p>
+                <p><strong>Indicaciones:</strong> Niños pequeños para prevenir meningitis bacteriana.</p>
+                <p><strong>Contraindicaciones:</strong> Alergia severa a algún componente.</p>
+                <p><strong>Recomendaciones ante esquema atrasado:</strong> Aplicar la dosis pendiente lo antes posible según edad.</p>
+                <p><strong>Complicaciones:</strong> Dolor local, fiebre, irritabilidad.</p>
+            </div>
+        </div>
+        <div class="vacuna" onclick="toggleInfo('antigripal')">
+            <h3>Antigripal</h3>
+            <div class="info" id="antigripal">
+                <p><strong>Edad de aplicación:</strong> Anual a partir de los 6 meses de edad.</p>
+                <p><strong>Previene:</strong> Influenza estacional.</p>
+                <p><strong>Vía de administración:</strong> Intramuscular.</p>
+                <p><strong>Composición:</strong> Virus inactivados de influenza (cepas variables cada año).</p>
+                <p><strong>Compatibilidad con otras vacunas:</strong> Puede administrarse simultáneamente con otras vacunas en sitios anatómicos diferentes.</p>
+                <p><strong>Indicaciones:</strong> Personas con factores de riesgo, embarazadas, niños pequeños, adultos mayores.</p>
+                <p><strong>Contraindicaciones:</strong> Alergia severa a componentes de la vacuna, fiebre alta al momento de la vacunación.</p>
+                <p><strong>Recomendaciones ante esquema atrasado:</strong> Aplicar la dosis lo antes posible en la temporada de vacunación.</p>
+                <p><strong>Complicaciones:</strong> Reacciones leves como fiebre, dolor local, fatiga.</p>
+            </div>
+        </div>
+        <div class="vacuna" onclick="toggleInfo('hepatitis_a')">
+            <h3>Hepatitis A</h3>
+            <div class="info" id="hepatitis_a">
+                <p><strong>Edad de aplicación:</strong> 12 meses.</p>
+                <p><strong>Previene:</strong> Hepatitis A.</p>
+                <p><strong>Vía de administración:</strong> Intramuscular.</p>
+                <p><strong>Composición:</strong> Virus inactivado de la Hepatitis A.</p>
+                <p><strong>Compatibilidad con otras vacunas:</strong> Puede administrarse simultáneamente con otras vacunas del calendario en sitios anatómicos diferentes.</p>
+                <p><strong>Indicaciones:</strong> Prevención de la Hepatitis A en niños.</p>
+                <p><strong>Contraindicaciones:</strong> Alergia severa a algún componente de la vacuna.</p>
+                <p><strong>Recomendaciones ante esquema atrasado:</strong> Aplicar la dosis única lo antes posible.</p>
+                <p><strong>Complicaciones:</strong> Dolor en el sitio de aplicación, fiebre baja, fatiga.</p>
+            </div>
+            </div>
+            <div class="vacuna" onclick="toggleInfo('varicela')">
+                <h3>Varicela</h3>
+                <div class="info" id="varicela">
+                    <p><strong>Edad de aplicación:</strong> 15 meses de edad.</p>
+                    <p><strong>Previene:</strong> Infección por el virus varicela-zóster.</p>
+                    <p><strong>Vía de administración:</strong> Subcutánea, en la parte superior del brazo.</p>
+                    <p><strong>Composición:</strong> Virus varicela-zóster atenuado.</p>
+                    <p><strong>Compatibilidad con otras vacunas:</strong> Puede administrarse simultáneamente con otras vacunas del calendario, en sitios anatómicos diferentes.</p>
+                    <p><strong>Indicaciones:</strong> Prevención de la varicela en niños.</p>
+                    <p><strong>Contraindicaciones:</strong> Personas inmunocomprometidas, embarazo, alergia grave a algún componente de la vacuna.</p>
+                    <p><strong>Recomendaciones ante esquema atrasado:</strong> Aplicar la dosis lo antes posible según la edad recomendada.</p>
+                    <p><strong>Complicaciones:</strong> Reacciones leves como fiebre, sarpullido, enrojecimiento en el sitio de aplicación.</p>
+                </div>
+            </div>
+            <div class="vacuna" onclick="toggleInfo('triple_viral')">
+                <h3>Triple Viral</h3>
+                <div class="info" id="triple_viral">
+                    <p><strong>Edad de aplicación:</strong> Primera dosis a los 12 meses, segunda dosis a los 5 años.</p>
+                    <p><strong>Previene:</strong> Sarampión, rubéola y paperas.</p>
+                    <p><strong>Vía de administración:</strong> Subcutánea, en la parte superior del brazo.</p>
+                    <p><strong>Composición:</strong> Virus vivos atenuados de sarampión, rubéola y paperas.</p>
+                    <p><strong>Compatibilidad con otras vacunas:</strong> Puede administrarse simultáneamente con otras vacunas en sitios anatómicos diferentes.</p>
+                    <p><strong>Indicaciones:</strong> Protección contra las enfermedades virales mencionadas.</p>
+                    <p><strong>Contraindicaciones:</strong> Embarazo, inmunosupresión grave, alergia a componentes de la vacuna.</p>
+                    <p><strong>Recomendaciones ante esquema atrasado:</strong> Aplicar la dosis faltante lo antes posible.</p>
+                    <p><strong>Complicaciones:</strong> Leves molestias locales, fiebre moderada, reacción alérgica rara.</p>
+                </div>
+        </div>
+        <div class="vacuna" onclick="toggleInfo('triplebacteriana_acelular')">
+            <h3>Triple Bacteriana Acelular</h3>
+            <div class="info" id="triplebacteriana_acelular">
+                <p><strong>Edad de aplicación:</strong> 11 años y en cada embarazo a partir de la semana 20 de gestación.</p>
+                <p><strong>Previene:</strong> Difteria, tétanos y tos convulsa.</p>
+                <p><strong>Vía de administración:</strong> Intramuscular, en el brazo.</p>
+                <p><strong>Composición:</strong> Toxoides de difteria y tétanos combinados con antígenos purificados de Bordetella pertussis.</p>
+                <p><strong>Compatibilidad con otras vacunas:</strong> Puede administrarse simultáneamente con otras vacunas del calendario en sitios anatómicos diferentes.</p>
+                <p><strong>Indicaciones:</strong> Se aplica en adolescentes y adultos como refuerzo y en embarazadas para la protección del recién nacido contra la tos convulsa.</p>
+                <p><strong>Contraindicaciones:</strong> Reacción grave a una dosis previa, alergia severa a algún componente de la vacuna.</p>
+                <p><strong>Recomendaciones ante esquema atrasado:</strong> Se debe aplicar la dosis faltante sin necesidad de reiniciar el esquema.</p>
+                <p><strong>Complicaciones:</strong> Dolor local, fiebre leve, fatiga, cefalea. Efectos adversos graves son extremadamente raros.</p>
+            </div>
+        </div>
+        <div class="vacuna" onclick="toggleInfo('triplebacteriana_celular')">
+            <h3>Triple Bacteriana Celular</h3>
+            <div class="info" id="triplebacteriana_celular">
+                <p><strong>Edad de aplicación:</strong> 2, 4 y 6 meses, con un refuerzo a los 5-6 años.</p>
+                <p><strong>Previene:</strong> Difteria, tétanos y tos convulsa (Bordetella pertussis).</p>
+                <p><strong>Vía de administración:</strong> Intramuscular, en el muslo en lactantes y en el brazo en niños mayores.</p>
+                <p><strong>Composición:</strong> Toxoides de difteria y tétanos combinados con Bordetella pertussis inactivada (células enteras).</p>
+                <p><strong>Compatibilidad con otras vacunas:</strong> Puede administrarse simultáneamente con la vacuna contra la poliomielitis, hepatitis B y neumococo en sitios anatómicos distintos.</p>
+                <p><strong>Indicaciones:</strong> Es parte del esquema regular de vacunación infantil.</p>
+                <p><strong>Contraindicaciones:</strong> Reacción grave a una dosis previa (encefalopatía, fiebre alta no atribuible a otra causa en las primeras 48 horas), alergia a algún componente de la vacuna.</p>
+                <p><strong>Recomendaciones ante esquema atrasado:</strong> Se debe completar el esquema según la edad del niño, con las dosis faltantes sin reiniciar el esquema.</p>
+                <p><strong>Complicaciones:</strong> Fiebre, dolor e hinchazón en el sitio de inyección, irritabilidad, en casos raros convulsiones febriles.</p>
+            </div>
+        </div> 
+    <div class="vacuna" onclick="toggleInfo('vsr')">
+        <h3>Virus Sincitial Respiratorio (VSR)</h3>
+        <div class="info" id="vsr">
+            <p><strong>Edad de aplicación:</strong> En neonatos de alto riesgo</p>
+            <p><strong>Indicado para:</strong> Prematuros (<32 semanas), lactantes con displasia broncopulmonar o cardiopatías congénitas.</p>
+            <p><strong>Tipo de vacuna:</strong> Anticuerpo monoclonal (Palivizumab) → No es una vacuna tradicional, sino una inmunización pasiva.</p>
+            <p><strong>Administración:</strong> Intramuscular, 1 dosis mensual durante la temporada de VSR.</p>
+            <p><strong>Contraindicaciones:</strong> Hipersensibilidad al fármaco.</p>
+            <p><strong>Complicaciones:</strong> Reacciones locales, fiebre leve.</p>
+        </div>
+    </div>
+    <div class="vacuna" onclick="toggleInfo('vph')">
+        <h3>VPH (Virus del Papiloma Humano)</h3>
+        <div class="info" id="vph">
+            <p><strong>Edad de aplicación:</strong> A los 11 años en niños y niñas.</p>
+            <p><strong>Previene:</strong> Infecciones por el Virus del Papiloma Humano y cánceres asociados (cuello uterino, orofaríngeo, ano-genital).</p>
+            <p><strong>Vía de administración:</strong> Intramuscular.</p>
+            <p><strong>Composición:</strong> Partículas similares a virus (VLP) de los tipos de VPH más oncogénicos.</p>
+            <p><strong>Compatibilidad con otras vacunas:</strong> Puede aplicarse junto con otras vacunas del calendario en diferentes sitios anatómicos.</p>
+            <p><strong>Indicaciones:</strong> Todos los niños y niñas de 11 años.</p>
+            <p><strong>Contraindicaciones:</strong> Reacción alérgica grave a una dosis previa o a sus componentes.</p>
+            <p><strong>Recomendaciones ante esquema atrasado:</strong> Aplicar las dosis pendientes según la edad, idealmente antes de los 15 años.</p>
+            <p><strong>Complicaciones:</strong> Dolor en el sitio de aplicación, fiebre baja, reacciones alérgicas raras.</p>
+        </div>
+    </div>
+    <img src="cnv.IMG.png" 
+    alt="Calendario de vacunación argentino" 
+    class="footer-image" 
+    onclick="openModal()">
+
+<div id="modal">
+   <span onclick="closeModal()">&times;</span>
+   <img src="cnv.IMG.png" alt="Calendario ampliado">
+</div>
+    <script>
+        function openModal() {
+            document.getElementById("modal").style.display = "flex";
+        }
+    
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+    </script>
+     <script>
+        function toggleInfo(id) {
+            var info = document.getElementById(id);
+            if (info.style.display === "none" || info.style.display === "") {
+                info.style.display = "block";
+            } else {
+                info.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
